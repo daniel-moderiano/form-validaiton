@@ -16,6 +16,14 @@ body {
   flex-direction: column;
 }
 
+.email-error {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
 label {
   margin-top: 1rem;
 }
