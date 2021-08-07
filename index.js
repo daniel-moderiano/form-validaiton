@@ -41,9 +41,8 @@ function showEmailError() {
 function showCountryError() {
   if(country.validity.valueMissing) {
     countryError.textContent = 'You need to enter a country name';
-  } else if(country.validity.typeMismatch) {
-    // Consider a regEx to exclude numbers and special characters
-    countryError.textContent  = 'Entered value needs to be a country name';
+  } else if(country.validity.patternMismatch) {
+    countryError.textContent  = 'Entered value cannot contain numbers';
   } else if(country.validity.tooShort) {
     countryError.textContent  = `Country should be at least ${ country.minLength } characters; you entered ${ country.value.length }.`;
   }
