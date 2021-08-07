@@ -51,17 +51,33 @@ function showCountryError() {
 }
 
 function showZipError() {
-  console.log(zip.value.length);
   if(zip.validity.valueMissing) {
     zipError.textContent = 'You need to enter a zip code';
   } else if(zip.validity.patternMismatch) {
     zipError.textContent = "Zip code must 4 numerical digits only";
   }
-
   zipError.classList.add('active');
 }
 
+function showPasswordError() {
+  if(password.validity.valueMissing) {
+    passwordError.textContent = 'You need to enter a password';
+  } else if(password.validity.patternMismatch) {
+    passwordError.textContent = "Password must be 8-15 characters in length";
+  }
+  passwordError.classList.add('active');
+} 
 
+function showPassConfError() {
+  if(passwordConf.validity.valueMissing) {
+    passConfError.textContent = 'You must re-enter your password';
+  }
+  passConfError.classList.add('active');
+} 
+
+function comparePasswords() {
+  return password.value === passwordConf.value;
+}
 
 
 // Listens for a user clicking out of an input field in the form
@@ -98,9 +114,24 @@ form.addEventListener('focusout', (e) => {
   }
   if (e.target.id === 'password') {
     // Execute validation check here
+    if (e.target.validity.valid) {
+      passwordError.textContent = "";
+      passwordError.classList.remove('active');
+    } else {
+      showPasswordError();
+    }
   }
   if (e.target.id === 'password-conf') {
     // Execute validation check here
+    if (!e.target.validity.valid) {
+      showPassConfError();
+    } else if (!comparePasswords()) {
+      passConfError.textContent = "Passwords do not match!";
+      passConfError.classList.add('active');
+    } else {
+      passConfError.textContent = "";
+      passConfError.classList.remove('active');
+    }
   }
 });
 

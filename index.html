@@ -21,7 +21,7 @@
       <input id="zip" type="text" pattern="[0-9]{4}" required>
       <div class="zip-error error"></div>
       <label for="password">Password</label>
-      <input id="password" type="text" required>
+      <input id="password" type="text" pattern="^([a-zA-Z0-9@*#]{8,15})$" required>
       <div class="pass-error error"></div>
       <label for="password-conf">Confirm Password</label>
       <input id="password-conf" type="text" required>
