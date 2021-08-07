@@ -1,5 +1,6 @@
 // Add the nonvalidate attribute when the JS loads to avoid loss of validation if JS fails to load
 const form = document.querySelector('form');
+const formInputs = document.querySelectorAll('input');
 const email = document.querySelector('#email');
 const emailError = document.querySelector('.email-error');
 
@@ -57,3 +58,15 @@ form.addEventListener('focusout', (e) => {
   }
 });
 
+
+form.addEventListener('submit', function(e) {
+  // Check for validity of all input fields
+  formInputs.forEach(input => {
+    if (!input.validity.valid) {
+      // Show error message for each failed input
+
+      e.preventDefault();
+    }
+  });
+  
+});
