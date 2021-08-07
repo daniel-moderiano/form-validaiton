@@ -141,6 +141,24 @@ form.addEventListener('submit', function(e) {
   formInputs.forEach(input => {
     if (!input.validity.valid) {
       // Show error message for each failed input
+      if (input.id === "email") {
+        showEmailError();
+      }
+      if (input.id === "country") {
+        showCountryError();
+      }
+      if (input.id === "zip") {
+        showZipError();
+      }
+      if (input.id === "password") {
+        showPasswordError();
+      }
+      if (input.id === "password-conf") {
+        showPassConfError();
+      }
+      e.preventDefault();
+    }
+    if (passConfError.classList.contains("active")) {
 
       e.preventDefault();
     }
