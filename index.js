@@ -4,6 +4,18 @@ const formInputs = document.querySelectorAll('input');
 const email = document.querySelector('#email');
 const emailError = document.querySelector('.email-error');
 
+const country = document.querySelector('#country');
+const countryError = document.querySelector('.country-error');
+
+const zip = document.querySelector('#zip');
+const zipError = document.querySelector('.zip-error');
+
+const password = document.querySelector('#password');
+const passwordError = document.querySelector('.pass-error');
+
+const passwordConf = document.querySelector('#password-conf');
+const passConfError = document.querySelector('.pass-conf-error');
+
 form.setAttribute('novalidate', "");
 
 // Use individualised functions for each form input
@@ -26,6 +38,36 @@ function showEmailError() {
   emailError.classList.add('active');
 }
 
+function showCountryError() {
+  if(country.validity.valueMissing) {
+    countryError.textContent = 'You need to enter a country name';
+  } else if(country.validity.typeMismatch) {
+    // Consider a regEx to exclude numbers and special characters
+    countryError.textContent  = 'Entered value needs to be a country name';
+  } else if(country.validity.tooShort) {
+    countryError.textContent  = `Country should be at least ${ country.minLength } characters; you entered ${ country.value.length }.`;
+  }
+
+  countryError.classList.add('active');
+}
+
+function showZipError() {
+  console.log(zip.value.length);
+  if(zip.validity.valueMissing) {
+    zipError.textContent = 'You need to enter a zip code';
+  } else if(country.validity.typeMismatch) {
+    // regEx to ensure only numbers are in the string
+    zipError.textContent  = 'Entered value needs can only contain numbers';
+  } else if(zip.validity.tooShort || zip.validity.tooLong) {
+    zipError.textContent  = 'Zip code should be exactly 4 numbers';
+  }
+
+  zipError.classList.add('active');
+}
+
+
+
+
 // Listens for a user clicking out of an input field in the form
 form.addEventListener('focusout', (e) => {
   if (!e.target.nodeName === 'INPUT') {
@@ -35,20 +77,28 @@ form.addEventListener('focusout', (e) => {
     // Execute validation check here
     if (e.target.validity.valid) {
       // Code to execute for valid input
-      console.log("valid");
       emailError.textContent = "";
       emailError.classList.remove('active');
     } else {
       // show error
-      console.log("Invalid");
       showEmailError();
     }
   }
   if (e.target.id === 'country') {
-    // Execute validation check here
+    if (e.target.validity.valid) {
+      countryError.textContent = "";
+      countryError.classList.remove('active');
+    } else {
+      showCountryError();
+    }
   }
   if (e.target.id === 'zip') {
-    // Execute validation check here
+    if (e.target.validity.valid) {
+      zipError.textContent = "";
+      zipError.classList.remove('active');
+    } else {
+      showZipError();
+    }
   }
   if (e.target.id === 'password') {
     // Execute validation check here
