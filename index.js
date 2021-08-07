@@ -55,11 +55,8 @@ function showZipError() {
   console.log(zip.value.length);
   if(zip.validity.valueMissing) {
     zipError.textContent = 'You need to enter a zip code';
-  } else if(country.validity.typeMismatch) {
-    // regEx to ensure only numbers are in the string
-    zipError.textContent  = 'Entered value needs can only contain numbers';
-  } else if(zip.validity.tooShort || zip.validity.tooLong) {
-    zipError.textContent  = 'Zip code should be exactly 4 numbers';
+  } else if(zip.validity.patternMismatch) {
+    zipError.textContent = "Zip code must 4 numerical digits only";
   }
 
   zipError.classList.add('active');

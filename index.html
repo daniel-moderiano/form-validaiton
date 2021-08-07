@@ -15,10 +15,10 @@
       <input id="email" type="email" minlength="10" required>
       <div class="email-error error"></div>
       <label for="country">Country</label>
-      <input id="country" type="text" minlength="4" required>
+      <input id="country" type="text" minlength="4" pattern="^([^0-9]*)$" required>
       <div class="country-error error"></div>
       <label for="zip">Zip Code</label>
-      <input id="zip" type="text" minlength="4" maxlength="4" required>
+      <input id="zip" type="text" pattern="[0-9]{4}" required>
       <div class="zip-error error"></div>
       <label for="password">Password</label>
       <input id="password" type="text" required>
